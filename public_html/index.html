@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="icon" type="image/png" href="img/logotype.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЭкоДобро — Главная</title>
+    <!-- Подключение шрифтов Montserrat (700) и Arsenal (400, 700) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Arsenal:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Подключение вашего файла стилей -->
+    <link rel="stylesheet" href="css/css.css"> 
+</head>
+<body>
+
+    <div class="main-hero">
+        <!-- Фоновое изображение -->
+        <img class="main-hero-bg-img" src="img/Background.jpg" alt="Фон">
+        <div class="main-hero-overlay"></div>
+        
+        <!-- ПАНЕЛЬ МЕНЮ: РАВНОМЕРНО РАСПРЕДЕЛЕНА -->
+        <nav class="main-nav-panel">
+            <a href="about.html">О проекте</a>
+            <a href="karta-SOS.html">Карта SOS</a>
+            <a href="lichniy-vclad.html">Личный вклад</a>
+            <a href="volunteer.php">Волонтерство</a>
+            <a href="pynkty-priema.html">Пункты приема</a>
+            <a href="events.php">Мероприятия</a>
+        </nav>
+
+        <!-- ЦЕНТРАЛЬНЫЙ ЗАГОЛОВОК С ТЕНЬЮ-ПОДЛОЖКОЙ -->
+        <div class="main-header">
+            <div class="main-text-glow"></div> <!-- Овальная тень из ТЗ -->
+            <h1>ЭКОДОБРО</h1>
+            <p>Создаем будущее, действуя сегодня</p>
+        </div>
+
+        <!-- ЦЕНТРАЛЬНАЯ ЧАСТЬ -->
+        <div class="main-center-content">
+            <div class="main-description">
+                <p>ЭкоДобро — это цифровая платформа, созданная для вдохновения и объединения людей, готовых внести свой вклад в спасение планеты.</p>
+                <p>Мы создаем пространство, где каждый может найти возможности для участия в волонтерских проектах и поддержки фондов.</p>
+            </div>
+
+            <div class="main-side-buttons">
+                <a href="javascript:void(0)" onclick="redirectToAccount()" class="main-glass-btn">Мой ЭкоВклад</a>
+                <a href="lichniy-vclad.html#ecokalkulator" class="main-glass-btn">ЭкоКалькулятор</a>
+            </div>
+        </div>
+        <!-- НИЖНЯЯ ЧАСТЬ -->
+        <div class="main-bottom-content">
+        <div class="start-text">
+           <p>С чего начать?</p>
+        </div>
+        <div class="cards-container">
+            <!-- Карточка 1 -->
+            <div class="action-card">
+                <div class="empty-icon-container">
+                    <div class="img-test">
+                     <img src = "img/test.png">
+                    </div>
+                </div>
+                <h3 class="card-title">Пройди тест</h3>
+                <p class="card-description">Узнай свой уровень экологической грамотности</p>
+                <a href="lichniy-vclad.html#ecokalkulator" class="card-btn">К ТЕСТУ</a>
+            </div>
+            <!-- Карточка 2 -->
+            <div class="action-card">
+                <div class="empty-icon-container">
+                    <div id="demoTreeWidget">
+                </div>
+                <!-- Подключаем скрипт демо-дерева -->
+                <script src="js/tree_demo.js"></script></div>
+                <h3 class="card-title">Вырасти дерево</h3>
+                <p class="card-description">Посади своё дерево и следи за его ростом</p>
+                <a href="vhod.php" class="card-btn">К ДЕРЕВУ</a>
+            </div>
+            <!-- Карточка 3 -->
+            <div class="action-card">
+                <div class="empty-icon-container">
+                    <div class="img-map">
+                    <img src = "img/map.png">
+                    </div>
+                </div>
+                <h3 class="card-title">Отметь мусор</h3>
+                <p class="card-description">Найди ближайший пункт приема отходов</p>
+                <a href="karta-SOS.html" class="card-btn">К КАРТЕ</a>
+            </div>
+        </div>
+        
+        <!-- МОТИВАЦИОННАЯ ФРАЗА - ОТДЕЛЬНЫЙ БЛОК, НЕ ВНУТРИ КАРТОЧКИ! -->
+        <div class="motivation-container">
+            <div class="motivation-text">
+               <p>Помочь природе проще, чем ты думаешь!</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function redirectToAccount() {
+    fetch('check_session.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.logged_in) {
+                window.location.href = 'lk.php';
+            } else {
+                window.location.href = 'vhod.php';
+            }
+        })
+        .catch(() => {
+            window.location.href = 'vhod.php';
+        });
+}
+</script>
+</body>
+</main-body>
+</html>
