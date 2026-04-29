@@ -1,5 +1,4 @@
 <?php
-// events.php - переименуйте ваш файл из .html в .php
 
 // Настройки подключения к базе данных
 $host = 'localhost';
@@ -7,19 +6,17 @@ $dbname = 'nngasu5804_ecodobro';
 $user = 'nngasu5804_ecodobro';
 $pass = 'Mu6hgKE5';
 
-// Переменные для хранения мероприятий
 $events_db = [];
 $carousel_events_db = [];
 
 try {
-    // Подключаемся к базе данных
+    
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    // Текущая дата
+
     $today = date('Y-m-d');
-    
-    // Запрос: выбираем все активные мероприятия
+
     $sql = "SELECT 
                 id, 
                 title, 
@@ -40,7 +37,7 @@ try {
     $stmt->execute();
     $events_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // Получаем 6 ближайших мероприятий для карусели
+   
     $sql_carousel = "SELECT 
                         id, 
                         title, 
@@ -63,7 +60,7 @@ try {
     $carousel_events_db = $stmt_carousel->fetchAll(PDO::FETCH_ASSOC);
     
 } catch (Exception $e) {
-    // Если ошибка БД - используем статический массив
+    
     $events_db = [];
     $carousel_events_db = [];
 }
@@ -78,7 +75,7 @@ try {
     <link rel="icon" type="image/png" href="/img/logotype.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Arsenal:wght@400;700&family=Grenze:wght@400;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* Дополнительные стили только для выпадающего меню профиля (не конфликтуют с существующими) */
+       
         .profile-icon-container {
             position: relative;
         }
@@ -140,7 +137,7 @@ try {
 <div class="content-container">
     <main>
         
-        <!-- Меню -->
+    
          <nav class="menu-bg">
             <a href="about.html">О проекте</a>
             <a href="volunteer.php">Волонтерство</a>
@@ -162,7 +159,7 @@ try {
             <span class="breadcrumb-current">Мероприятия </span>
         </div>
         
-        <!-- ИКОНКА ПРОФИЛЯ -->
+     
         <div class="profile-icon-container">
             <div id="profileIcon" class="profile-icon">
                 <img src="img/profile.png" alt="Профиль">
@@ -213,11 +210,11 @@ try {
 
 
 <script>
-    // Данные о мероприятиях из PHP (если есть) или из статического массива
+    
     const eventsFromDB = <?php echo json_encode($events_db, JSON_UNESCAPED_UNICODE); ?>;
     const carouselFromDB = <?php echo json_encode($carousel_events_db, JSON_UNESCAPED_UNICODE); ?>;
     
-    // Статический массив с мероприятиями (резервный, если БД не работает)
+    
     const staticEvents = [
         {
             id: 1,
@@ -293,11 +290,11 @@ try {
         }
     ];
     
-    // Выбираем, какие данные использовать: из БД или статические
+   
     const events = (eventsFromDB.length > 0) ? eventsFromDB : staticEvents;
     const carouselEvents = (carouselFromDB.length > 0) ? carouselFromDB : events.slice(0, 6);
     
-    // Добавляем anchor для событий из БД (если их нет)
+
     events.forEach((event, index) => {
         if (!event.anchor) {
             event.anchor = `event${event.id || index + 1}`;
@@ -310,7 +307,7 @@ try {
         }
     });
 
-    // Функция плавной прокрутки к мероприятию
+ 
     function scrollToEvent(anchorId) {
         const element = document.getElementById(anchorId);
         if (element) {
@@ -323,7 +320,7 @@ try {
                 behavior: "smooth"
             });
 
-            // Подсветка карточки
+     
             element.style.transition = "box-shadow 0.3s";
             element.style.boxShadow = "0 0 0 3px #8aae7a, 0 8px 30px rgba(0, 0, 0, 0.2)";
             setTimeout(() => {
@@ -349,7 +346,7 @@ try {
             </div>
         `).join('');
 
-        // Добавляем обработчики кликов для картинок в карусели
+     
         document.querySelectorAll('.events-carousel-slide img').forEach((img, index) => {
             img.addEventListener('click', () => {
                 const anchor = carouselEvents[index].anchor;
@@ -357,7 +354,7 @@ try {
             });
         });
 
-        // Добавляем обработчики кликов для кнопок в карусели
+    
         document.querySelectorAll('.carousel-more-btn').forEach((btn, index) => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -435,11 +432,11 @@ try {
         return dateStr;
     }
 
-    // Инициализация
+  
     renderCarousel();
     renderAllEvents();
 
-    // Управление каруселью
+  
     document.getElementById('prevBtn').addEventListener('click', () => {
         currentSlide = (currentSlide - 1 + carouselEvents.length) % carouselEvents.length;
         updateCarousel();
@@ -459,7 +456,7 @@ try {
 
     
 
-    // Если в URL есть якорь - прокручиваем при загрузке
+   
     if (window.location.hash) {
         const anchor = window.location.hash.substring(1);
         setTimeout(() => {
